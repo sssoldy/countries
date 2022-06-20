@@ -1,8 +1,20 @@
 import * as React from 'react'
-import { Typography } from '@mui/material'
+import { AppBar, Container, Link, Toolbar } from '@mui/material'
+import ThemeModeSwitcher from '../components/ThemeModeSwitcher'
 
 const Header: React.FC = () => {
-  return <Typography variant="h2">Header</Typography>
+  return (
+    <AppBar position="static" elevation={1}>
+      <Container>
+        <Toolbar disableGutters>
+          <Link href="/" variant="h6" color="inherit" sx={{ mr: 'auto' }}>
+            Where in the world?
+          </Link>
+          <ThemeModeSwitcher />
+        </Toolbar>
+      </Container>
+    </AppBar>
+  )
 }
 
 export default Header

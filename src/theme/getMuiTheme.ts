@@ -1,5 +1,12 @@
-import { createTheme, responsiveFontSizes, Theme } from '@mui/material/styles'
+import {
+  createTheme,
+  responsiveFontSizes,
+  Theme,
+  LinkProps as MuiLinkProps,
+} from '@mui/material'
 import { ThemeMode } from '../types/theme'
+import { LinkBehavior } from './LinkBehavior'
+import { THEME_MODE_PALETTE_MAP } from './palette'
 
 export const getMuiTheme = (themeMode: ThemeMode) => {
   let theme = createTheme({
@@ -14,11 +21,59 @@ export const getMuiTheme = (themeMode: ThemeMode) => {
     },
     palette: {
       mode: themeMode,
+      text: {
+        primary: THEME_MODE_PALETTE_MAP[themeMode].text,
+      },
+      background: {
+        default: THEME_MODE_PALETTE_MAP[themeMode].background,
+        paper: THEME_MODE_PALETTE_MAP[themeMode].backgroundElements,
+      },
     },
     typography: {
       fontFamily: "'Nunito Sans', sans-serif",
+      h2: {
+        fontSize: '2rem',
+      },
+      h6: {
+        fontWeight: 800,
+        fontSize: '1.5rem',
+      },
+    },
+    mixins: {
+      toolbar: {
+        minHeight: '80px',
+      },
     },
     components: {
+      MuiPaper: {
+        styleOverrides: {
+          root: {
+            // Disable lighter surface
+            // https://mui.com/material-ui/react-paper/#elevation
+            backgroundImage: 'none',
+          },
+        },
+      },
+      MuiAppBar: {
+        defaultProps: {
+          color: 'inherit',
+        },
+      },
+      MuiLink: {
+        defaultProps: {
+          component: LinkBehavior,
+        } as MuiLinkProps, // https://github.com/mui/material-ui/issues/29942
+        styleOverrides: {
+          root: {
+            textDecoration: 'none',
+          },
+        },
+      },
+      MuiButtonBase: {
+        defaultProps: {
+          LinkComponent: LinkBehavior,
+        },
+      },
       MuiCssBaseline: {
         styleOverrides: `
           @font-face {
@@ -62,6 +117,11 @@ export const getMuiTheme = (themeMode: ThemeMode) => {
   })
 
   theme = createTheme(theme, {
+    shadows: [
+      ...theme.shadows.map((shadow, i) =>
+        i === 1 ? '0px 2px 4px rgba(0, 0, 0, 0.0562443)' : shadow,
+      ),
+    ],
     components: {
       MuiContainer: {
         defaultProps: {
