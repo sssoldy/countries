@@ -1,8 +1,8 @@
 import * as React from 'react'
-import { Typography } from '@mui/material'
+import SearchFilter from '../components/SearchFilter/SearchFilter'
 
 const Home: React.FC = () => {
-  return <Typography variant="h2">Home</Typography>
+  return <SearchFilter />
 }
 
 export default Home
