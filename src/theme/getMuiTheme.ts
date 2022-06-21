@@ -34,6 +34,10 @@ export const getMuiTheme = (themeMode: ThemeMode) => {
       h2: {
         fontSize: '2rem',
       },
+      h3: {
+        fontWeight: 800,
+        fontSize: '1.125rem',
+      },
       h6: {
         fontWeight: 800,
         fontSize: '1.5rem',

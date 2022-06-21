@@ -6,7 +6,7 @@ import RegionFilter from './RegionFilter'
 
 const SearchFilter: React.FC = () => {
   return (
-    <Container>
+    <Container sx={{ mb: '48px' }}>
       <Box component="form" noValidate autoComplete="off">
         <Stack
           direction={{ xs: 'column', sm: 'row' }}
