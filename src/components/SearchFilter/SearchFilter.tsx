@@ -1,6 +1,5 @@
-import { Box, Stack } from '@mui/material'
-import { Container } from '@mui/system'
 import * as React from 'react'
+import { Box, Stack, Container } from '@mui/material'
 import CountryFilter from './CountryFilter'
 import RegionFilter from './RegionFilter'
 

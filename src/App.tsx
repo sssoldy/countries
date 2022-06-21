@@ -5,6 +5,7 @@ import { Route } from 'react-router-dom'
 import { useThemeMode } from './contexts/ThemeModeContext'
 import Header from './layouts/Header'
 import Main from './layouts/Main'
+import Country from './pages/Country'
 import Home from './pages/Home'
 import NotFound from './pages/NotFound'
 
@@ -22,6 +23,7 @@ const App: React.FC = () => {
       <Routes>
         <Route path="/" element={<Main />}>
           <Route index element={<Home />} />
+          <Route path="country/:code" element={<Country />} />
         </Route>
         <Route path="*" element={<NotFound />} />
       </Routes>

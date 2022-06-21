@@ -33,6 +33,7 @@ export const getMuiTheme = (themeMode: ThemeMode) => {
       fontFamily: "'Nunito Sans', sans-serif",
       h2: {
         fontSize: '2rem',
+        fontWeight: 800,
       },
       h3: {
         fontWeight: 800,
@@ -122,9 +123,11 @@ export const getMuiTheme = (themeMode: ThemeMode) => {
 
   theme = createTheme(theme, {
     shadows: [
-      ...theme.shadows.map((shadow, i) =>
-        i === 1 ? '0px 2px 4px rgba(0, 0, 0, 0.0562443)' : shadow,
-      ),
+      ...theme.shadows.map((shadow, i) => {
+        if (i === 1) return '0px 2px 4px rgba(0, 0, 0, 0.0562443)'
+        if (i === 2) return '0px 0px 4px 1px rgba(0, 0, 0, 0.104931)'
+        return shadow
+      }),
     ],
     components: {
       MuiContainer: {

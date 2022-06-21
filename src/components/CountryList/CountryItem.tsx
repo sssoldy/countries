@@ -1,3 +1,4 @@
+import * as React from 'react'
 import {
   Card,
   CardActionArea,
@@ -6,12 +7,12 @@ import {
   Typography,
   Stack,
 } from '@mui/material'
-import * as React from 'react'
+import Description from '../styled/Description'
 
 const CountryItem: React.FC = () => {
   return (
-    <Card>
-      <CardActionArea>
+    <Card sx={{ height: '100%', width: { xs: '264px', sm: '100%' } }}>
+      <CardActionArea href={`/country/PER`} sx={{ height: '100%' }}>
         <CardMedia
           component="img"
           height="160"
@@ -23,15 +24,9 @@ const CountryItem: React.FC = () => {
             Peru
           </Typography>
           <Stack spacing={0.5}>
-            <Typography sx={{ fontWeight: 300 }}>
-              <strong style={{ fontWeight: 600 }}>Population: </strong>32971846
-            </Typography>
-            <Typography sx={{ fontWeight: 300 }}>
-              <strong style={{ fontWeight: 600 }}>Region: </strong>Americas
-            </Typography>
-            <Typography sx={{ fontWeight: 300 }}>
-              <strong style={{ fontWeight: 600 }}>Capital: </strong>Lima
-            </Typography>
+            <Description term="Population" details="32971846" />
+            <Description term="Region" details="Americas" />
+            <Description term="Capital" details="Lima" />
           </Stack>
         </CardContent>
       </CardActionArea>
