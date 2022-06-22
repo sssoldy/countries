@@ -7,6 +7,7 @@ import {
 import { Countries } from '../../services/restcountries'
 import { ICountriesState, ICountry } from '../../types/country'
 import { RootState } from '../store'
+import { selectFilter } from './filterSlice'
 
 export const fetchCountries = createAsyncThunk<Array<ICountry>>(
   'countries/fetchCountries',
@@ -50,6 +51,9 @@ const countriesSlice = createSlice({
 
 export const selectCountriesError = (state: RootState) => state.countries.error
 
+export const { selectById: selectCountryById, selectAll: selectCountries } =
+  countriesAdapter.getSelectors((state: RootState) => state.countries)
+
 export const selectCountriesStatus = createSelector(
   (state: RootState) => state.countries.status,
   status => ({
@@ -60,10 +64,22 @@ export const selectCountriesStatus = createSelector(
   }),
 )
 
-export const {
-  selectIds: selectCountriesIds,
-  selectById: selectCountryById,
-  selectTotal: selectCountriesNumber,
-} = countriesAdapter.getSelectors((state: RootState) => state.countries)
+export const selectFilteredCountriesIds = createSelector(
+  [selectCountries, selectFilter],
+  (countries, filter) => {
+    const { country, region } = filter
+
+    const filteredCountries = countries.filter(c => {
+      const isCountryMatch = c.name
+        .toLowerCase()
+        .includes(country.toLowerCase())
+      const isRegionMatch = c.region.includes(region)
+      const isFiltered = [isCountryMatch, isRegionMatch].every(Boolean)
+      return isFiltered
+    })
+
+    return filteredCountries.map(c => c.alpha3Code)
+  },
+)
 
 export default countriesSlice.reducer

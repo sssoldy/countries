@@ -4,25 +4,23 @@ import CountryItem from './CountryItem'
 import { useAppSelector } from '../../hooks/useAppSelector'
 import {
   selectCountriesError,
-  selectCountriesIds,
-  selectCountriesNumber,
   selectCountriesStatus,
+  selectFilteredCountriesIds,
 } from '../../app/slices/countriesSlice'
 import CountryListFallback from './CountryListFallback'
 import ErrorMessage from '../ErrorMessage'
 import InfoMessage from '../InfoMessage'
 
 const CountryList: React.FC = () => {
-  const countriesIds = useAppSelector(selectCountriesIds)
+  const countriesIds = useAppSelector(selectFilteredCountriesIds)
   const { isLoading, isSuccess } = useAppSelector(selectCountriesStatus)
   const error = useAppSelector(selectCountriesError)
-  const countriesNumber = useAppSelector(selectCountriesNumber)
-  const isCountries = Boolean(countriesNumber)
+  const isIds = Boolean(countriesIds.length)
 
   return (
     <Container>
       {error && <ErrorMessage error={error} />}
-      {!isCountries && isSuccess && <InfoMessage message="Nothing found" />}
+      {!isIds && isSuccess && <InfoMessage message="Nothing found" />}
       <Grid
         container
         spacing={{ xs: 5, lg: 6, xl: 9.5 }}
@@ -30,7 +28,7 @@ const CountryList: React.FC = () => {
         flexDirection={{ xs: 'column', sm: 'row' }}
       >
         {isLoading && <CountryListFallback />}
-        {isCountries &&
+        {isIds &&
           countriesIds.map(id => <CountryItem key={id} countryId={id} />)}
       </Grid>
     </Container>

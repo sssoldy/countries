@@ -5,6 +5,8 @@ import { THEME_MODE_PALETTE_MAP } from '../../theme/palette'
 import { selectCountriesStatus } from '../../app/slices/countriesSlice'
 import { useAppSelector } from '../../hooks/useAppSelector'
 import { LoadingIcon } from '../styled/LoadingIcon'
+import { countryFilterChanged } from '../../app/slices/filterSlice'
+import { useAppDispatch } from '../../hooks/useAppDispatch'
 
 // prettier-ignore
 const style = (theme: Theme) => ({
@@ -33,13 +35,34 @@ const style = (theme: Theme) => ({
 })
 
 const CountryFilter: React.FC = () => {
+  const [countryQuery, setCountryQuery] = React.useState('')
   const { isLoading, isError } = useAppSelector(selectCountriesStatus)
+  const timeoutRef = React.useRef<NodeJS.Timeout | undefined>(undefined)
+
+  const dispatch = useAppDispatch()
+
+  const onQueryChanged = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
+    const query = e.target.value
+    setCountryQuery(query)
+
+    if (timeoutRef.current) clearTimeout(timeoutRef.current)
+    timeoutRef.current = setTimeout(
+      () => dispatch(countryFilterChanged(query)),
+      500,
+    )
+  }
+
+  React.useEffect(() => () => clearTimeout(timeoutRef.current), [])
 
   return (
     <SearchFilterField
       id="search-country"
       label="Search for a country…"
       disabled={isLoading || isError}
+      value={countryQuery}
+      onChange={onQueryChanged}
       InputProps={{
         endAdornment: isLoading ? <LoadingIcon sx={{ flexShrink: 0 }} /> : null,
       }}

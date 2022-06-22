@@ -1,13 +1,14 @@
 import { SerializedError } from '@reduxjs/toolkit'
 import { ResponseStatus } from './api'
 
+export type Region = 'Africa' | 'America' | 'Asia' | 'Europe' | 'Oceania' | ''
 export interface ICountry {
   name: string
   topLevelDomain: Array<string>
   alpha3Code: string
   capital: string
   subregion: string
-  region: string
+  region: Region
   population: number
   borders: Array<string>
   nativeName: string

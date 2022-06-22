@@ -5,6 +5,12 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown'
 import { useAppSelector } from '../../hooks/useAppSelector'
 import { selectCountriesStatus } from '../../app/slices/countriesSlice'
 import { LoadingIcon } from '../styled/LoadingIcon'
+import {
+  regionFilterChanged,
+  selectRegionFilter,
+} from '../../app/slices/filterSlice'
+import { useAppDispatch } from '../../hooks/useAppDispatch'
+import { Region } from '../../types/country'
 
 const selectProps = (isLoading: Boolean) => ({
   IconComponent: isLoading ? LoadingIcon : KeyboardArrowDownIcon,
@@ -43,12 +49,26 @@ const filterFieldStyle = {
   },
 }
 
+const regions: Array<{ value: Region; label: string }> = [
+  { value: '', label: 'None' },
+  { value: 'Africa', label: 'Africa' },
+  { value: 'America', label: 'America' },
+  { value: 'Asia', label: 'Asia' },
+  { value: 'Europe', label: 'Europe' },
+  { value: 'Oceania', label: 'Oceania' },
+]
+
 const RegionFilter: React.FC = () => {
-  const [region, setRegion] = React.useState('')
+  const region = useAppSelector(selectRegionFilter)
   const { isLoading, isError } = useAppSelector(selectCountriesStatus)
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setRegion(event.target.value)
+  const dispatch = useAppDispatch()
+
+  const onRegionChanged = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
+    const r = e.target.value as Region
+    dispatch(regionFilterChanged(r))
   }
 
   return (
@@ -59,7 +79,7 @@ const RegionFilter: React.FC = () => {
       label="Filter by Region"
       disabled={isLoading || isError}
       value={region}
-      onChange={handleChange}
+      onChange={onRegionChanged}
       sx={filterFieldStyle}
     >
       {regions.map(option => (
@@ -70,14 +90,5 @@ const RegionFilter: React.FC = () => {
     </SearchFilterField>
   )
 }
-
-const regions = [
-  { value: '', label: 'None' },
-  { value: 'Africa', label: 'Africa' },
-  { value: 'America', label: 'America' },
-  { value: 'Asia', label: 'Asia' },
-  { value: 'Europe', label: 'Europe' },
-  { value: 'Oceania', label: 'Oceania' },
-]
 
 export default RegionFilter
