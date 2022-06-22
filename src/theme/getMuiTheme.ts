@@ -46,6 +46,10 @@ export const getMuiTheme = (themeMode: ThemeMode) => {
         fontSize: '1.5rem',
         letterSpacing: '-0.0375rem',
       },
+      body2: {
+        fontSize: '0.875rem',
+        fontWeight: 300,
+      },
     },
     mixins: {
       toolbar: {

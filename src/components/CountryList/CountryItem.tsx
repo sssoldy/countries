@@ -6,32 +6,61 @@ import {
   CardContent,
   Typography,
   Stack,
+  Grid,
 } from '@mui/material'
 import Description from '../styled/Description'
+import { EntityId } from '@reduxjs/toolkit'
+import { useAppSelector } from '../../hooks/useAppSelector'
+import { selectCountryById } from '../../app/slices/countriesSlice'
 
-const CountryItem: React.FC = () => {
+interface CountryItemProps {
+  countryId: EntityId
+}
+
+const CountryItem: React.FC<CountryItemProps> = ({ countryId }) => {
+  const country = useAppSelector(state => selectCountryById(state, countryId))
+
+  if (!country) return null
+
   return (
-    <Card sx={{ height: '100%', width: { xs: '264px', sm: '100%' } }}>
-      <CardActionArea href={`/country/PER`} sx={{ height: '100%' }}>
-        <CardMedia
-          component="img"
-          height="160"
-          image="https://flagcdn.com/pe.svg"
-          alt="Peru"
-        />
-        <CardContent sx={{ padding: '28px 24px 40px 24px' }}>
-          <Typography variant="h3" sx={{ mb: '15px' }}>
-            Germany
-          </Typography>
-          <Stack spacing={0.5}>
-            <Description term="Population" details="81,770,900" />
-            <Description term="Region" details="Europe" />
-            <Description term="Capital" details="Berlin" />
-          </Stack>
-        </CardContent>
-      </CardActionArea>
-    </Card>
+    <Grid item sm={6} md={4} lg={3}>
+      <Card sx={{ height: '100%', width: { xs: '264px', sm: '100%' } }}>
+        <CardActionArea
+          href={`/country/${country.alpha3Code}`}
+          sx={{ height: '100%' }}
+        >
+          <CardMedia
+            component="img"
+            height="160"
+            image={country.flag}
+            alt={country.name}
+          />
+          <CardContent sx={{ padding: '28px 24px 42px 24px' }}>
+            <Typography variant="h3" sx={{ mb: '17px' }}>
+              {country.name}
+            </Typography>
+            <Stack spacing={0.5}>
+              <Description
+                variant="body2"
+                term="Population"
+                details={country.population}
+              />
+              <Description
+                variant="body2"
+                term="Region"
+                details={country.region}
+              />
+              <Description
+                variant="body2"
+                term="Capital"
+                details={country.capital}
+              />
+            </Stack>
+          </CardContent>
+        </CardActionArea>
+      </Card>
+    </Grid>
   )
 }
 
-export default CountryItem
+export default React.memo(CountryItem)

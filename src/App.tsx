@@ -1,5 +1,5 @@
-import { CssBaseline, ThemeProvider } from '@mui/material'
 import * as React from 'react'
+import { CssBaseline, ThemeProvider } from '@mui/material'
 import { Routes } from 'react-router'
 import { Route } from 'react-router-dom'
 import { useThemeMode } from './contexts/ThemeModeContext'

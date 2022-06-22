@@ -72,51 +72,19 @@ const Country: React.FC = () => {
                 },
               }}
             >
-              <Description
-                sx={{ fontSize: '1rem' }}
-                term="Native Name"
-                details="België"
-              />
-              <Description
-                sx={{ fontSize: '1rem' }}
-                term="Population"
-                details="11,319,511"
-              />
-              <Description
-                sx={{ fontSize: '1rem' }}
-                term="Region"
-                details="Europe"
-              />
-              <Description
-                sx={{ fontSize: '1rem' }}
-                term="Sub Region"
-                details="Western Europe"
-              />
-              <Description
-                sx={{ fontSize: '1rem' }}
-                term="Capital"
-                details="Brussels"
-              />
+              <Description term="Native Name" details="België" />
+              <Description term="Population" details="11,319,511" />
+              <Description term="Region" details="Europe" />
+              <Description term="Sub Region" details="Western Europe" />
+              <Description term="Capital" details="Brussels" />
             </Stack>
             <Stack spacing={1} sx={{ mb: { xs: '32px', sm: '0' } }}>
-              <Description
-                sx={{ fontSize: '1rem' }}
-                term="Top Level Domain"
-                details=".be"
-              />
-              <Description
-                sx={{ fontSize: '1rem' }}
-                term="Currencies"
-                details="Euro"
-              />
-              <Description
-                sx={{ fontSize: '1rem' }}
-                term="Languages"
-                details="Dutch, French, German"
-              />
+              <Description term="Top Level Domain" details=".be" />
+              <Description term="Currencies" details="Euro" />
+              <Description term="Languages" details="Dutch, French, German" />
             </Stack>
             <Description
-              sx={{ fontSize: '1rem', mt: { md: '36px' } }}
+              sx={{ mt: { md: '36px' } }}
               term="Border Countries"
               details={borderCountries}
             />
