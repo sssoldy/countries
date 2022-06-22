@@ -1,19 +1,19 @@
 import { ThemeMode } from '../types/theme'
 
 export const palette = {
-  white: '#FFFFFF',
-  woodsmoke: '#111517',
-  transparent: '#FFFFFF00',
-  gray: '#848484',
+  white: 'rgb(255, 255, 255)',
+  woodsmoke: 'rgb(17, 21, 23)',
+  transparent: 'rgba(255, 255, 255, 0)',
+  gray: 'rgb(132, 132, 132)',
 
   ebonyClay: {
-    '400': '#2B3844',
-    '500': '#202C36',
+    '400': 'rgb(43, 56, 68)',
+    '500': 'rgb(32, 44, 54)',
   },
 
   seashell: {
-    '400': '#FFFFFF',
-    '500': '#F1F1F1',
+    '400': 'rgb(255, 255, 255)',
+    '500': 'rgb(241, 241, 241)',
   },
 }
 

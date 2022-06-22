@@ -1,3 +1,4 @@
+import { SerializedError } from '@reduxjs/toolkit'
 import { ResponseStatus } from './api'
 
 export interface ICountry {
@@ -22,5 +23,5 @@ export interface ICountry {
 
 export interface ICountriesState {
   status: ResponseStatus
-  error: string | null
+  error: SerializedError | null
 }

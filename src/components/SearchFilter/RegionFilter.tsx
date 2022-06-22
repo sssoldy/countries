@@ -2,9 +2,12 @@ import * as React from 'react'
 import { MenuItem } from '@mui/material'
 import { SearchFilterField } from '../styled/SearchFilterField'
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown'
+import { useAppSelector } from '../../hooks/useAppSelector'
+import { selectCountriesStatus } from '../../app/slices/countriesSlice'
+import { LoadingIcon } from '../styled/LoadingIcon'
 
-const selectProps = {
-  IconComponent: KeyboardArrowDownIcon,
+const selectProps = (isLoading: Boolean) => ({
+  IconComponent: isLoading ? LoadingIcon : KeyboardArrowDownIcon,
   MenuProps: {
     sx: { top: '6px' },
     PaperProps: {
@@ -18,7 +21,7 @@ const selectProps = {
       },
     },
   },
-}
+})
 
 const filterFieldStyle = {
   width: { xs: '100%', sm: '30%', md: '200px' },
@@ -42,6 +45,7 @@ const filterFieldStyle = {
 
 const RegionFilter: React.FC = () => {
   const [region, setRegion] = React.useState('')
+  const { isLoading, isError } = useAppSelector(selectCountriesStatus)
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setRegion(event.target.value)
@@ -50,9 +54,10 @@ const RegionFilter: React.FC = () => {
   return (
     <SearchFilterField
       select
-      SelectProps={selectProps}
+      SelectProps={selectProps(isLoading)}
       id="search-select-region"
       label="Filter by Region"
+      disabled={isLoading || isError}
       value={region}
       onChange={handleChange}
       sx={filterFieldStyle}
