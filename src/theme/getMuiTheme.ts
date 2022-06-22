@@ -34,14 +34,17 @@ export const getMuiTheme = (themeMode: ThemeMode) => {
       h2: {
         fontSize: '2rem',
         fontWeight: 800,
+        letterSpacing: '-0.05rem',
       },
       h3: {
         fontWeight: 800,
         fontSize: '1.125rem',
+        letterSpacing: '0.0313rem',
       },
       h6: {
         fontWeight: 800,
         fontSize: '1.5rem',
+        letterSpacing: '-0.0375rem',
       },
     },
     mixins: {
@@ -77,6 +80,14 @@ export const getMuiTheme = (themeMode: ThemeMode) => {
       MuiButtonBase: {
         defaultProps: {
           LinkComponent: LinkBehavior,
+        },
+      },
+      MuiButton: {
+        styleOverrides: {
+          root: {
+            color: 'inherit',
+            textTransform: 'capitalize',
+          },
         },
       },
       MuiCssBaseline: {

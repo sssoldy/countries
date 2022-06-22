@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Button, Typography } from '@mui/material'
+import { Button } from '@mui/material'
 import { ThemeModeContext } from '../contexts/ThemeModeContext'
 import { ThemeMode } from '../types/theme'
 import DarkModeIcon from '@mui/icons-material/DarkMode'
@@ -11,13 +11,11 @@ const ThemeModeSwitcher: React.FC = () => {
 
   return (
     <Button
-      color="inherit"
-      startIcon={isDarkMode ? <DarkModeIcon /> : <LightModeIcon />}
+      startIcon={isDarkMode ? <LightModeIcon /> : <DarkModeIcon />}
+      sx={{ px: 0, fontWeight: 600, fontSize: '1rem' }}
       onClick={toggleThemeMode}
     >
-      <Typography sx={{ textTransform: 'capitalize', fontWeight: 600 }}>
-        {isDarkMode ? 'Dark' : 'Light'} Mode
-      </Typography>
+      {isDarkMode ? 'Light' : 'Dark'} Mode
     </Button>
   )
 }

@@ -18,6 +18,7 @@ export const SearchFilterField = styled(TextField)(({ theme }) => ({
   },
 
   '& .MuiInputBase-root': {
+    color: THEME_MODE_PALETTE_MAP[theme.palette.mode].inputPrimary,
     borderRadius: 'inherit',
 
     '& .MuiOutlinedInput-notchedOutline': {

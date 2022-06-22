@@ -2,9 +2,7 @@ import * as React from 'react'
 import { Container, Grid } from '@mui/material'
 import CountryItem from './CountryItem'
 
-interface CountryListProps {}
-
-const CountryList: React.FC<CountryListProps> = () => {
+const CountryList: React.FC = () => {
   return (
     <Container>
       <Grid
@@ -13,6 +11,18 @@ const CountryList: React.FC<CountryListProps> = () => {
         alignItems={{ xs: 'center', sm: 'stretch' }}
         flexDirection={{ xs: 'column', sm: 'row' }}
       >
+        <Grid item sm={6} md={4} lg={3}>
+          <CountryItem />
+        </Grid>
+        <Grid item sm={6} md={4} lg={3}>
+          <CountryItem />
+        </Grid>
+        <Grid item sm={6} md={4} lg={3}>
+          <CountryItem />
+        </Grid>
+        <Grid item sm={6} md={4} lg={3}>
+          <CountryItem />
+        </Grid>
         <Grid item sm={6} md={4} lg={3}>
           <CountryItem />
         </Grid>

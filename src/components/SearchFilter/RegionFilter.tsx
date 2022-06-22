@@ -1,10 +1,46 @@
 import * as React from 'react'
 import { MenuItem } from '@mui/material'
 import { SearchFilterField } from '../styled/SearchFilterField'
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown'
 
-interface RegionFilterProps {}
+const selectProps = {
+  IconComponent: KeyboardArrowDownIcon,
+  MenuProps: {
+    sx: { top: '6px' },
+    PaperProps: {
+      elevation: 1,
+      sx: {
+        borderRadius: '5px',
+        '& .MuiList-root .MuiMenuItem-root': {
+          padding: '4px 23px ',
+          fontSize: '0.875rem',
+        },
+      },
+    },
+  },
+}
 
-const RegionFilter: React.FC<RegionFilterProps> = () => {
+const filterFieldStyle = {
+  width: { xs: '100%', sm: '30%', md: '200px' },
+  '& .MuiInputLabel-root': {
+    px: '10px',
+    fontSize: '0.875rem',
+    lineHeight: '23px',
+  },
+  '& .MuiSelect-outlined': {
+    pl: '22px',
+    fontSize: '0.875rem',
+    lineHeight: '23px',
+  },
+  '& .MuiOutlinedInput-notchedOutline': {
+    pl: '10px',
+  },
+  '& .MuiSvgIcon-root': {
+    right: '12px',
+  },
+}
+
+const RegionFilter: React.FC = () => {
   const [region, setRegion] = React.useState('')
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -14,17 +50,12 @@ const RegionFilter: React.FC<RegionFilterProps> = () => {
   return (
     <SearchFilterField
       select
-      SelectProps={{
-        MenuProps: {
-          sx: { top: '6px' },
-          PaperProps: { elevation: 1, sx: { borderRadius: '5px' } },
-        },
-      }}
+      SelectProps={selectProps}
       id="search-select-region"
       label="Filter by Region"
       value={region}
       onChange={handleChange}
-      sx={{ width: { xs: '100%', sm: '30%', md: '200px' } }}
+      sx={filterFieldStyle}
     >
       {regions.map(option => (
         <MenuItem key={option.value} value={option.value}>

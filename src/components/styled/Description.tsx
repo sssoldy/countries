@@ -20,6 +20,7 @@ const TypographyWrapper: React.FC<TypographyWrapperProps> = ({
 }
 
 const Description = styled(TypographyWrapper)(({ details }) => ({
+  fontSize: '0.875rem',
   fontWeight: 300,
 
   '& strong': {
@@ -29,7 +30,7 @@ const Description = styled(TypographyWrapper)(({ details }) => ({
   ...(React.isValidElement(details) && {
     '& strong': {
       fontWeight: 600,
-      marginRight: '16px',
+      marginRight: '10px',
     },
   }),
 }))

@@ -1,40 +1,34 @@
 import * as React from 'react'
-import { Box, Button, Stack, Typography } from '@mui/material'
-import { Container } from '@mui/system'
-import { CountryLink } from '../components/styled/CountryLink'
+import { Box, Stack, Typography, Container } from '@mui/material'
+import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace'
+import { PrimaryButton } from '../components/styled/PrimaryButton'
 import Description from '../components/styled/Description'
 
-interface CountryProps {}
-
-const Country: React.FC<CountryProps> = () => {
+const Country: React.FC = () => {
   const borderCountries = (
     <Box component="span">
-      <CountryLink
-        href={`/country/FRA`}
-        component={Button}
-        sx={{ margin: '5px 10px 5px 0' }}
-      >
+      <PrimaryButton href={`/country/FRA`} sx={{ margin: '5px 10px 5px 0' }}>
         France
-      </CountryLink>
-      <CountryLink
-        href={`/country/GER`}
-        component={Button}
-        sx={{ margin: '5px 10px 5px 0' }}
-      >
+      </PrimaryButton>
+      <PrimaryButton href={`/country/GER`} sx={{ margin: '5px 10px 5px 0' }}>
         Germany
-      </CountryLink>
-      <CountryLink
-        href={`/country/NET`}
-        component={Button}
-        sx={{ margin: '5px 10px 5px 0' }}
-      >
+      </PrimaryButton>
+      <PrimaryButton href={`/country/NET`} sx={{ margin: '5px 10px 5px 0' }}>
         Netherlands
-      </CountryLink>
+      </PrimaryButton>
     </Box>
   )
 
   return (
-    <Container>
+    <Container sx={{ pt: { xs: '16px', sm: '32px' } }}>
+      <PrimaryButton
+        href="/"
+        size="large"
+        startIcon={<KeyboardBackspaceIcon />}
+        sx={{ mb: { xs: '64px', sm: '80px' } }}
+      >
+        Back
+      </PrimaryButton>
       <Stack
         direction={{ xs: 'column', md: 'row' }}
         justifyContent="space-between"
@@ -47,7 +41,7 @@ const Country: React.FC<CountryProps> = () => {
             borderRadius: '10px',
             width: { xs: '100%', md: '65%' },
             maxWidth: '560px',
-            height: 'auto',
+            height: { xs: 'auto', lg: '400px' },
             objectFit: 'cover',
           }}
           alt="Peru"
@@ -55,11 +49,13 @@ const Country: React.FC<CountryProps> = () => {
         />
         <Box
           sx={{
-            width: { xs: '100%', sm: '560px' },
+            width: '100%',
+            maxWidth: '600px',
+            pt: '10px',
           }}
         >
-          <Typography variant="h2" sx={{ mb: { xs: '16px', sm: '24px' } }}>
-            Peru
+          <Typography variant="h2" sx={{ mb: { xs: '16px', sm: '26px' } }}>
+            Belgium
           </Typography>
           <Stack
             direction="row"
@@ -76,18 +72,54 @@ const Country: React.FC<CountryProps> = () => {
                 },
               }}
             >
-              <Description term="Native Name" details="België" />
-              <Description term="Population" details="11,319,511" />
-              <Description term="Region" details="Europe" />
-              <Description term="Sub Region" details="Western Europe" />
-              <Description term="Capital" details="Brussels" />
+              <Description
+                sx={{ fontSize: '1rem' }}
+                term="Native Name"
+                details="België"
+              />
+              <Description
+                sx={{ fontSize: '1rem' }}
+                term="Population"
+                details="11,319,511"
+              />
+              <Description
+                sx={{ fontSize: '1rem' }}
+                term="Region"
+                details="Europe"
+              />
+              <Description
+                sx={{ fontSize: '1rem' }}
+                term="Sub Region"
+                details="Western Europe"
+              />
+              <Description
+                sx={{ fontSize: '1rem' }}
+                term="Capital"
+                details="Brussels"
+              />
             </Stack>
-            <Stack spacing={1} sx={{ marginBottom: { xs: '32px' } }}>
-              <Description term="Top Level Domain" details=".be" />
-              <Description term="Currencies" details="Euro" />
-              <Description term="Languages" details="Dutch, French, German" />
+            <Stack spacing={1} sx={{ mb: { xs: '32px', sm: '0' } }}>
+              <Description
+                sx={{ fontSize: '1rem' }}
+                term="Top Level Domain"
+                details=".be"
+              />
+              <Description
+                sx={{ fontSize: '1rem' }}
+                term="Currencies"
+                details="Euro"
+              />
+              <Description
+                sx={{ fontSize: '1rem' }}
+                term="Languages"
+                details="Dutch, French, German"
+              />
             </Stack>
-            <Description term="Border Countries" details={borderCountries} />
+            <Description
+              sx={{ fontSize: '1rem', mt: { md: '36px' } }}
+              term="Border Countries"
+              details={borderCountries}
+            />
           </Stack>
         </Box>
       </Stack>

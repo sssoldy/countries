@@ -19,14 +19,14 @@ const CountryItem: React.FC = () => {
           image="https://flagcdn.com/pe.svg"
           alt="Peru"
         />
-        <CardContent sx={{ padding: '24px 24px 36px 24px' }}>
-          <Typography variant="h3" sx={{ mb: '16px' }}>
-            Peru
+        <CardContent sx={{ padding: '28px 24px 40px 24px' }}>
+          <Typography variant="h3" sx={{ mb: '15px' }}>
+            Germany
           </Typography>
           <Stack spacing={0.5}>
-            <Description term="Population" details="32971846" />
-            <Description term="Region" details="Americas" />
-            <Description term="Capital" details="Lima" />
+            <Description term="Population" details="81,770,900" />
+            <Description term="Region" details="Europe" />
+            <Description term="Capital" details="Berlin" />
           </Stack>
         </CardContent>
       </CardActionArea>
