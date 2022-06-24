@@ -3,11 +3,12 @@ import {
   createEntityAdapter,
   createSelector,
   createSlice,
+  EntityId,
 } from '@reduxjs/toolkit'
 import { Countries } from '../../services/restcountries'
 import { ICountriesState, ICountry } from '../../types/country'
 import { RootState } from '../store'
-import { selectFilter } from './filterSlice'
+import { selectFormFilter, selectOffsetFilter } from './filterSlice'
 
 export const fetchCountries = createAsyncThunk<Array<ICountry>>(
   'countries/fetchCountries',
@@ -65,7 +66,7 @@ export const selectCountriesStatus = createSelector(
 )
 
 export const selectFilteredCountriesIds = createSelector(
-  [selectCountries, selectFilter],
+  [selectCountries, selectFormFilter],
   (countries, filter) => {
     const { country, region } = filter
 
@@ -78,7 +79,20 @@ export const selectFilteredCountriesIds = createSelector(
       return isFiltered
     })
 
-    return filteredCountries.map(c => c.alpha3Code)
+    return filteredCountries.map(c => c.alpha3Code as EntityId)
+  },
+)
+
+export const selectFilteredCountriesIdsSlice = createSelector(
+  selectFilteredCountriesIds,
+  selectOffsetFilter,
+  (ids, offset) => {
+    const countriesIdsTotal = ids.length
+    const countriesIdsSlice = ids.slice(0, offset)
+    return {
+      countriesIdsTotal,
+      countriesIdsSlice,
+    }
   },
 )
 

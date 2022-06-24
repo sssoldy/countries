@@ -5,22 +5,39 @@ import { useAppSelector } from '../../hooks/useAppSelector'
 import {
   selectCountriesError,
   selectCountriesStatus,
-  selectFilteredCountriesIds,
+  selectFilteredCountriesIdsSlice,
 } from '../../app/slices/countriesSlice'
 import CountryListFallback from './CountryListFallback'
 import ErrorMessage from '../ErrorMessage'
 import InfoMessage from '../InfoMessage'
+import { useAppDispatch } from '../../hooks/useAppDispatch'
+import {
+  offsetFilterChanged,
+  selectOffsetFilter,
+} from '../../app/slices/filterSlice'
+import { useObserver } from '../../hooks/useObserver'
 
 const CountryList: React.FC = () => {
-  const countriesIds = useAppSelector(selectFilteredCountriesIds)
+  const { countriesIdsSlice, countriesIdsTotal } = useAppSelector(
+    selectFilteredCountriesIdsSlice,
+  )
   const { isLoading, isSuccess } = useAppSelector(selectCountriesStatus)
   const error = useAppSelector(selectCountriesError)
-  const isIds = Boolean(countriesIds.length)
+  const offset = useAppSelector(selectOffsetFilter)
+
+  const hasIds = Boolean(countriesIdsSlice.length)
+  const hasMoreIds = !Boolean(countriesIdsSlice.length % offset)
+  const isLimit = countriesIdsSlice.length === countriesIdsTotal
+  const canLoad = hasIds && hasMoreIds && !isLimit
+
+  const dispatch = useAppDispatch()
+  const scrollRef = React.useRef<HTMLDivElement | null>(null)
+  useObserver(scrollRef, hasIds, canLoad, () => dispatch(offsetFilterChanged()))
 
   return (
     <Container>
       {error && <ErrorMessage error={error} />}
-      {!isIds && isSuccess && <InfoMessage message="Nothing found" />}
+      {!hasIds && isSuccess && <InfoMessage message="Nothing found" />}
       <Grid
         container
         spacing={{ xs: 5, lg: 6, xl: 9.5 }}
@@ -28,8 +45,12 @@ const CountryList: React.FC = () => {
         flexDirection={{ xs: 'column', sm: 'row' }}
       >
         {isLoading && <CountryListFallback />}
-        {isIds &&
-          countriesIds.map(id => <CountryItem key={id} countryId={id} />)}
+        {hasIds &&
+          countriesIdsSlice.map(id => <CountryItem key={id} countryId={id} />)}
+        <div
+          ref={scrollRef}
+          style={{ width: '100%', height: '20px', backgroundColor: 'red' }}
+        />
       </Grid>
     </Container>
   )
