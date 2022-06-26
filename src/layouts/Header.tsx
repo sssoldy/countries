@@ -4,11 +4,7 @@ import ThemeModeSwitcher from '../components/ThemeModeSwitcher'
 
 const Header: React.FC = () => {
   return (
-    <AppBar
-      position="static"
-      elevation={1}
-      sx={{ mb: { xs: '24px', sm: '48px' } }}
-    >
+    <AppBar position="static" elevation={1}>
       <Container>
         <Toolbar disableGutters>
           <Link href="/" variant="h6" color="inherit" sx={{ mr: 'auto' }}>

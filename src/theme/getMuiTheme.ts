@@ -94,6 +94,11 @@ export const getMuiTheme = (themeMode: ThemeMode) => {
           },
         },
       },
+      MuiSkeleton: {
+        defaultProps: {
+          animation: 'wave',
+        },
+      },
       MuiCssBaseline: {
         styleOverrides: `
           @font-face {

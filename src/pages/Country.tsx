@@ -1,26 +1,33 @@
 import * as React from 'react'
-import { Box, Stack, Typography, Container } from '@mui/material'
+import { Box, Stack, Container } from '@mui/material'
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace'
 import { PrimaryButton } from '../components/styled/PrimaryButton'
-import Description from '../components/styled/Description'
+import { useParams } from 'react-router-dom'
+import {
+  fetchSingleCountry,
+  selectCountryError,
+} from '../app/slices/countrySlice'
+import { useAppDispatch } from '../hooks/useAppDispatch'
+import CountryDetails from '../components/CountryDetails/CountryDetails'
+import CountryFlag from '../components/CountryFlag'
+import { useAppSelector } from '../hooks/useAppSelector'
+import ErrorMessage from '../components/ErrorMessage'
 
 const Country: React.FC = () => {
-  const borderCountries = (
-    <Box component="span">
-      <PrimaryButton href={`/country/FRA`} sx={{ margin: '5px 10px 5px 0' }}>
-        France
-      </PrimaryButton>
-      <PrimaryButton href={`/country/GER`} sx={{ margin: '5px 10px 5px 0' }}>
-        Germany
-      </PrimaryButton>
-      <PrimaryButton href={`/country/NET`} sx={{ margin: '5px 10px 5px 0' }}>
-        Netherlands
-      </PrimaryButton>
-    </Box>
-  )
+  const { code } = useParams()
+  const error = useAppSelector(selectCountryError)
+  const dispatch = useAppDispatch()
+
+  React.useEffect(() => {
+    if (!code) return undefined
+    const promise = dispatch(fetchSingleCountry(code))
+    return () => promise.abort()
+  }, [code, dispatch])
+
+  if (error) return <ErrorMessage error={error} />
 
   return (
-    <Container sx={{ pt: { xs: '16px', sm: '32px' } }}>
+    <Container sx={{ py: { xs: '40px', sm: '80px' } }}>
       <PrimaryButton
         href="/"
         size="large"
@@ -32,63 +39,27 @@ const Country: React.FC = () => {
       <Stack
         direction={{ xs: 'column', md: 'row' }}
         justifyContent="space-between"
-        alignItems={{ sm: 'center' }}
+        alignItems="center"
         spacing={{ xs: 5, lg: 8 }}
       >
         <Box
-          component="img"
           sx={{
-            borderRadius: '10px',
-            width: { xs: '100%', md: '65%' },
+            width: '100%',
             maxWidth: '560px',
-            height: { xs: 'auto', lg: '400px' },
-            objectFit: 'cover',
+            flexShrink: '1',
           }}
-          alt="Peru"
-          src="https://flagcdn.com/pe.svg"
-        />
+        >
+          <CountryFlag />
+        </Box>
+
         <Box
           sx={{
             width: '100%',
             maxWidth: '600px',
-            pt: '10px',
+            flexShrink: '2',
           }}
         >
-          <Typography variant="h2" sx={{ mb: { xs: '16px', sm: '26px' } }}>
-            Belgium
-          </Typography>
-          <Stack
-            direction="row"
-            justifyContent="space-between"
-            sx={{ flexWrap: 'wrap' }}
-          >
-            <Stack
-              spacing={1}
-              sx={{
-                margin: {
-                  xs: '0 32px 32px 0',
-                  md: '0 0 32px 0',
-                  lg: '0 32px 32px 0',
-                },
-              }}
-            >
-              <Description term="Native Name" details="België" />
-              <Description term="Population" details="11,319,511" />
-              <Description term="Region" details="Europe" />
-              <Description term="Sub Region" details="Western Europe" />
-              <Description term="Capital" details="Brussels" />
-            </Stack>
-            <Stack spacing={1} sx={{ mb: { xs: '32px', sm: '0' } }}>
-              <Description term="Top Level Domain" details=".be" />
-              <Description term="Currencies" details="Euro" />
-              <Description term="Languages" details="Dutch, French, German" />
-            </Stack>
-            <Description
-              sx={{ mt: { md: '36px' } }}
-              term="Border Countries"
-              details={borderCountries}
-            />
-          </Stack>
+          <CountryDetails />
         </Box>
       </Stack>
     </Container>

@@ -10,13 +10,19 @@ import { ICountriesState, ICountry } from '../../types/country'
 import { RootState } from '../store'
 import { selectFormFilter, selectOffsetFilter } from './filterSlice'
 
-export const fetchCountries = createAsyncThunk<Array<ICountry>>(
-  'countries/fetchCountries',
-  async () => {
-    const { data } = await Countries.all()
-    return data
-  },
-)
+export const fetchAllCountries = createAsyncThunk<
+  Array<ICountry>,
+  void,
+  { state: RootState }
+>('countries/fetchAllCountries', async (_, { getState }) => {
+  const countriesDictionary = getState().countries.entities
+  const countries = Object.values(countriesDictionary)
+
+  if (countries.length) return countries as Array<ICountry>
+
+  const { data } = await Countries.all()
+  return data
+})
 
 const countriesAdapter = createEntityAdapter<ICountry>({
   selectId: state => state.alpha3Code,
@@ -34,15 +40,15 @@ const countriesSlice = createSlice({
   reducers: {},
   extraReducers: builder => {
     builder
-      .addCase(fetchCountries.pending, state => {
+      .addCase(fetchAllCountries.pending, state => {
         state.status = 'loading'
         state.error = null
       })
-      .addCase(fetchCountries.rejected, (state, action) => {
+      .addCase(fetchAllCountries.rejected, (state, action) => {
         state.status = 'failed'
         state.error = action.error
       })
-      .addCase(fetchCountries.fulfilled, (state, action) => {
+      .addCase(fetchAllCountries.fulfilled, (state, action) => {
         state.status = 'successed'
         state.error = null
         countriesAdapter.setAll(state, action.payload)

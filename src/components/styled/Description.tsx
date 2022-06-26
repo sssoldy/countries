@@ -3,7 +3,7 @@ import { styled, Typography, TypographyProps } from '@mui/material'
 
 interface TypographyWrapperProps extends TypographyProps {
   term: string
-  details: JSX.Element | string | number
+  details?: string | number
 }
 
 const TypographyWrapper: React.FC<TypographyWrapperProps> = ({
@@ -14,7 +14,7 @@ const TypographyWrapper: React.FC<TypographyWrapperProps> = ({
   return (
     <Typography {...rest}>
       <strong>{term}: </strong>
-      {details}
+      {details || null}
     </Typography>
   )
 }
@@ -23,13 +23,6 @@ const Description = styled(TypographyWrapper)(({ details }) => ({
   '& strong': {
     fontWeight: 600,
   },
-
-  ...(React.isValidElement(details) && {
-    '& strong': {
-      fontWeight: 600,
-      marginRight: '10px',
-    },
-  }),
 }))
 
 export default Description

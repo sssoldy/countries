@@ -5,7 +5,10 @@ import { THEME_MODE_PALETTE_MAP } from '../../theme/palette'
 import { selectCountriesStatus } from '../../app/slices/countriesSlice'
 import { useAppSelector } from '../../hooks/useAppSelector'
 import { LoadingIcon } from '../styled/LoadingIcon'
-import { countryFilterChanged } from '../../app/slices/filterSlice'
+import {
+  countryFilterChanged,
+  selectCountryFilter,
+} from '../../app/slices/filterSlice'
 import { useAppDispatch } from '../../hooks/useAppDispatch'
 
 // prettier-ignore
@@ -35,8 +38,9 @@ const style = (theme: Theme) => ({
 })
 
 const CountryFilter: React.FC = () => {
-  const [countryQuery, setCountryQuery] = React.useState('')
+  const country = useAppSelector(selectCountryFilter)
   const { isLoading, isError } = useAppSelector(selectCountriesStatus)
+  const [countryQuery, setCountryQuery] = React.useState(country)
   const timeoutRef = React.useRef<NodeJS.Timeout | undefined>(undefined)
 
   const dispatch = useAppDispatch()

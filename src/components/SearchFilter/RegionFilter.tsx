@@ -56,6 +56,7 @@ const regions: Array<{ value: Region; label: string }> = [
   { value: 'Asia', label: 'Asia' },
   { value: 'Europe', label: 'Europe' },
   { value: 'Oceania', label: 'Oceania' },
+  { value: 'Polar', label: 'Polar' },
 ]
 
 const RegionFilter: React.FC = () => {

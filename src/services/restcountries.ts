@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { ICountry } from '../types/country'
+import { CountryId, IBorderCountry, ICountry } from '../types/country'
 
 axios.defaults.baseURL = 'https://restcountries.com/v2/'
 
@@ -20,11 +20,25 @@ const fields = [
 
 export const Countries = {
   all: async () =>
-    (await axios.request)<Array<ICountry>>({
+    await axios.request<Array<ICountry>>({
       method: 'get',
       url: 'all',
       params: {
         fields: fields.join(','),
       },
+    }),
+
+  single: async (countryId: CountryId) =>
+    await axios.request<ICountry>({
+      method: 'get',
+      url: `alpha/${countryId}`,
+      params: { fields: fields.join(',') },
+    }),
+
+  borderCountries: async (countryIds: Array<CountryId>) =>
+    await axios.request<Array<IBorderCountry>>({
+      method: 'get',
+      url: 'alpha',
+      params: { codes: countryIds.join(','), fields: 'name,alpha3Code' },
     }),
 }

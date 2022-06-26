@@ -22,6 +22,8 @@ const CountryItem: React.FC<CountryItemProps> = ({ countryId }) => {
 
   if (!country) return null
 
+  const population = country.population.toLocaleString()
+
   return (
     <Grid item sm={6} md={4} lg={3}>
       <Card sx={{ height: '100%', width: { xs: '264px', sm: '100%' } }}>
@@ -43,7 +45,7 @@ const CountryItem: React.FC<CountryItemProps> = ({ countryId }) => {
               <Description
                 variant="body2"
                 term="Population"
-                details={country.population}
+                details={population}
               />
               <Description
                 variant="body2"

@@ -1,21 +1,12 @@
 import * as React from 'react'
 import { Alert, AlertTitle, Box, Typography } from '@mui/material'
-import { PrimaryButton } from './styled/PrimaryButton'
 import { SerializedError } from '@reduxjs/toolkit'
-import { useAppDispatch } from '../hooks/useAppDispatch'
-import { fetchCountries } from '../app/slices/countriesSlice'
 
 interface ErrorMessageProps {
   error: SerializedError
 }
 
 const ErrorMessage: React.FC<ErrorMessageProps> = ({ error }) => {
-  const dispatch = useAppDispatch()
-
-  const onTryAgainClicked = () => {
-    dispatch(fetchCountries())
-  }
-
   return (
     <Box
       sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}
@@ -33,9 +24,6 @@ const ErrorMessage: React.FC<ErrorMessageProps> = ({ error }) => {
           Message: <strong>{error.message}</strong>
         </Typography>
       </Alert>
-      <PrimaryButton size="large" onClick={onTryAgainClicked}>
-        Try Again
-      </PrimaryButton>
     </Box>
   )
 }
