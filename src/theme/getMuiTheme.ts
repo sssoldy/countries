@@ -26,7 +26,7 @@ export const getMuiTheme = (themeMode: ThemeMode) => {
       },
     },
     typography: {
-      fontFamily: "'Nunito Sans', sans-serif",
+      fontFamily: ['"Nunito Sans"', 'sans-serif'].join(','),
       h2: {
         fontSize: '2rem',
         fontWeight: 800,
@@ -101,45 +101,6 @@ export const getMuiTheme = (themeMode: ThemeMode) => {
         defaultProps: {
           animation: 'wave',
         },
-      },
-      MuiCssBaseline: {
-        styleOverrides: `
-          @font-face {
-            font-family: 'Nunito Sans';
-            font-style: normal;
-            font-weight: 300;
-            src: local(''),
-              url('../fonts/nunito-sans-v12-latin-300.woff2') format('woff2'),
-              url('../fonts/nunito-sans-v12-latin-300.woff') format('woff');
-          }
-
-          @font-face {
-            font-family: 'Nunito Sans';
-            font-style: normal;
-            font-weight: 400;
-            src: local(''),
-                 url('../fonts/nunito-sans-v12-latin-regular.woff2') format('woff2'),
-                 url('../fonts/nunito-sans-v12-latin-regular.woff') format('woff');
-          }
-
-          @font-face {
-            font-family: 'Nunito Sans';
-            font-style: normal;
-            font-weight: 600;
-            src: local(''),
-              url('../fonts/nunito-sans-v12-latin-600.woff2') format('woff2'),
-              url('../fonts/nunito-sans-v12-latin-600.woff') format('woff');
-          }
-
-          @font-face {
-            font-family: 'Nunito Sans';
-            font-style: normal;
-            font-weight: 800;
-            src: local(''),
-              url('../fonts/nunito-sans-v12-latin-800.woff2') format('woff2'),
-              url('../fonts/nunito-sans-v12-latin-800.woff') format('woff');
-          }
-        `,
       },
     },
   })
