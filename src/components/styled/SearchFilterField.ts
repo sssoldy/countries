@@ -1,4 +1,5 @@
-import { styled, TextField } from '@mui/material'
+import { TextField } from '@mui/material'
+import { styled } from '@mui/material/styles'
 import { palette, THEME_MODE_PALETTE_MAP } from '../../theme/palette'
 
 export const SearchFilterField = styled(TextField)(({ theme }) => ({

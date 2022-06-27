@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { CssBaseline, ThemeProvider } from '@mui/material'
+import { ThemeProvider } from '@mui/material/styles'
 import { Routes } from 'react-router'
 import { Route } from 'react-router-dom'
 import { useThemeMode } from './contexts/ThemeModeContext'
@@ -8,6 +8,7 @@ import Main from './layouts/Main'
 import Country from './pages/Country'
 import Home from './pages/Home'
 import NotFound from './pages/NotFound'
+import CssBaseline from '@mui/material/CssBaseline'
 
 const App: React.FC = () => {
   const themeMode = useThemeMode()

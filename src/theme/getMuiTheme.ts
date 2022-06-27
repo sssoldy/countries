@@ -1,9 +1,5 @@
-import {
-  createTheme,
-  responsiveFontSizes,
-  Theme,
-  LinkProps as MuiLinkProps,
-} from '@mui/material'
+import { Theme, LinkProps as MuiLinkProps } from '@mui/material'
+import { createTheme, responsiveFontSizes } from '@mui/material/styles'
 import { ThemeMode } from '../types/theme'
 import { LinkBehavior } from './LinkBehavior'
 import { THEME_MODE_PALETTE_MAP } from './palette'

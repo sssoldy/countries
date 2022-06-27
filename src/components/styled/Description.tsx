@@ -1,5 +1,6 @@
 import * as React from 'react'
-import { styled, Typography, TypographyProps } from '@mui/material'
+import { Typography, TypographyProps } from '@mui/material'
+import { styled } from '@mui/material/styles'
 
 interface TypographyWrapperProps extends TypographyProps {
   term: string
