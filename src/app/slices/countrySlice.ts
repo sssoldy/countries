@@ -66,7 +66,9 @@ const initialState: ICountyState = {
 const countrySlice = createSlice({
   name: 'country',
   initialState,
-  reducers: {},
+  reducers: {
+    countryReset: () => initialState,
+  },
   extraReducers: builder => {
     builder
       .addCase(fetchSingleCountry.pending, (state, action) => {
@@ -88,12 +90,14 @@ const countrySlice = createSlice({
   },
 })
 
+export const { countryReset } = countrySlice.actions
+
 export const selectCountry = (state: RootState) => state.country.country
 
 export const selectCountryError = (state: RootState) => state.country.error
 
 export const selectBorderCountriesIds = (state: RootState) => {
-  return state.country.country?.borders || []
+  return state.country.country?.borders
 }
 
 export const selectBorderCountries = (state: RootState) =>

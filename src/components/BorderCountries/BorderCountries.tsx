@@ -23,6 +23,7 @@ const BorderCountries: React.FC = () => {
   const dispatch = useAppDispatch()
 
   React.useEffect(() => {
+    if (!borderCounrtiesIds) return undefined
     ;(async () => {
       try {
         setError(null)
@@ -38,10 +39,10 @@ const BorderCountries: React.FC = () => {
 
   if (error) return <ErrorMessage error={error} />
 
-  if (status === 'loading')
+  if (status === 'loading' && borderCounrtiesIds)
     return <BorderCountriesFallback length={borderCounrtiesIds.length} />
 
-  if (status === 'successed' && !borderCountires)
+  if (!borderCounrtiesIds)
     return <Typography>has no border countries</Typography>
 
   return (

@@ -1,8 +1,8 @@
 import * as React from 'react'
-import { Typography } from '@mui/material'
+import InfoMessage from '../components/InfoMessage'
 
 const NotFound: React.FC = () => {
-  return <Typography variant="h2">Page not found.</Typography>
+  return <InfoMessage message="Page not found." />
 }
 
 export default NotFound

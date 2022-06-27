@@ -8,12 +8,17 @@ interface InfoMessageProps {
 const InfoMessage: React.FC<InfoMessageProps> = ({ message }) => {
   return (
     <Box
-      sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        py: '40px',
+      }}
     >
       <Alert
         variant="outlined"
         severity="info"
-        sx={{ width: '100%', maxWidth: '480px', mb: '16px' }}
+        sx={{ width: '100%', maxWidth: '480px' }}
       >
         <AlertTitle>Info</AlertTitle>
         <Typography>{message}</Typography>

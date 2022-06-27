@@ -4,6 +4,7 @@ import { fetchAllCountries } from '../app/slices/countriesSlice'
 import CountryList from '../components/CountryList/CountryList'
 import SearchFilter from '../components/SearchFilter/SearchFilter'
 import { useAppDispatch } from '../hooks/useAppDispatch'
+import ScrollToTop from '../components/ScrollToTop'
 
 const Home: React.FC = () => {
   const dispatch = useAppDispatch()
@@ -19,6 +20,7 @@ const Home: React.FC = () => {
     <Container sx={{ py: { xs: '24px', sm: '48px' } }}>
       <SearchFilter />
       <CountryList />
+      <ScrollToTop />
     </Container>
   )
 }

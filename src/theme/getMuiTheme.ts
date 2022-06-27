@@ -84,6 +84,7 @@ export const getMuiTheme = (themeMode: ThemeMode) => {
       MuiButtonBase: {
         defaultProps: {
           LinkComponent: LinkBehavior,
+          disableRipple: true,
         },
       },
       MuiButton: {
@@ -91,6 +92,12 @@ export const getMuiTheme = (themeMode: ThemeMode) => {
           root: {
             color: 'inherit',
             textTransform: 'capitalize',
+            '&:hover': {
+              backgroundColor: THEME_MODE_PALETTE_MAP[themeMode].hover,
+            },
+            '&.Mui-focusVisible': {
+              outline: '-webkit-focus-ring-color auto 1px',
+            },
           },
         },
       },

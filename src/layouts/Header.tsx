@@ -6,7 +6,7 @@ const Header: React.FC = () => {
   return (
     <AppBar position="static" elevation={1}>
       <Container>
-        <Toolbar disableGutters>
+        <Toolbar disableGutters id="back-to-top-anchor">
           <Link href="/" variant="h6" color="inherit" sx={{ mr: 'auto' }}>
             Where in the world?
           </Link>

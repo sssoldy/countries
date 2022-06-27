@@ -4,6 +4,7 @@ import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace'
 import { PrimaryButton } from '../components/styled/PrimaryButton'
 import { useParams } from 'react-router-dom'
 import {
+  countryReset,
   fetchSingleCountry,
   selectCountryError,
 } from '../app/slices/countrySlice'
@@ -21,7 +22,10 @@ const Country: React.FC = () => {
   React.useEffect(() => {
     if (!code) return undefined
     const promise = dispatch(fetchSingleCountry(code))
-    return () => promise.abort()
+    return () => {
+      promise.abort()
+      dispatch(countryReset())
+    }
   }, [code, dispatch])
 
   if (error) return <ErrorMessage error={error} />

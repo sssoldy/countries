@@ -12,7 +12,12 @@ const ThemeModeSwitcher: React.FC = () => {
   return (
     <Button
       startIcon={isDarkMode ? <LightModeIcon /> : <DarkModeIcon />}
-      sx={{ px: 0, fontWeight: 600, fontSize: '1rem' }}
+      sx={{
+        px: 0,
+        fontWeight: 600,
+        fontSize: '1rem',
+        '& .MuiButton-startIcon': { ml: 0 },
+      }}
       onClick={toggleThemeMode}
     >
       {isDarkMode ? 'Light' : 'Dark'} Mode
