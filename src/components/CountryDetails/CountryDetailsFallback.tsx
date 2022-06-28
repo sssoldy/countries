@@ -6,7 +6,7 @@ const CountryDetailsFallback: React.FC = () => {
     <>
       <Skeleton
         component="h2"
-        sx={{ pt: '10px', mb: { xs: '16px', sm: '24px' } }}
+        sx={{ maxWidth: '300px', pt: '10px', mb: { xs: '16px', sm: '24px' } }}
       />
       <Stack
         direction="row"

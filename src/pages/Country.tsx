@@ -13,6 +13,7 @@ import CountryDetails from '../components/CountryDetails/CountryDetails'
 import CountryFlag from '../components/CountryFlag'
 import { useAppSelector } from '../hooks/useAppSelector'
 import ErrorMessage from '../components/ErrorMessage'
+import { LinkBehavior } from '../components/LinkBehavior'
 
 const Country: React.FC = () => {
   const { code } = useParams()
@@ -34,6 +35,7 @@ const Country: React.FC = () => {
     <Container sx={{ py: { xs: '40px', sm: '80px' } }}>
       <PrimaryButton
         href="/"
+        component={LinkBehavior}
         size="large"
         startIcon={<KeyboardBackspaceIcon />}
         sx={{ mb: { xs: '64px', sm: '80px' } }}

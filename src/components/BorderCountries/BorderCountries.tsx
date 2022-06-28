@@ -12,6 +12,7 @@ import { ResponseStatus } from '../../types/api'
 import { SerializedError } from '@reduxjs/toolkit'
 import ErrorMessage from '../ErrorMessage'
 import { Typography } from '@mui/material'
+import { LinkBehavior } from '../LinkBehavior'
 
 const BorderCountries: React.FC = () => {
   const borderCountires = useAppSelector(selectBorderCountries)
@@ -52,6 +53,7 @@ const BorderCountries: React.FC = () => {
           <PrimaryButton
             key={c.alpha3Code}
             href={`/country/${c.alpha3Code}`}
+            component={LinkBehavior}
             sx={{ margin: '5px 10px 5px 0' }}
           >
             {c.name}

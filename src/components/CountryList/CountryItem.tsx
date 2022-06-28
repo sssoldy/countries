@@ -12,6 +12,7 @@ import Description from '../styled/Description'
 import { EntityId } from '@reduxjs/toolkit'
 import { useAppSelector } from '../../hooks/useAppSelector'
 import { selectCountryById } from '../../app/slices/countriesSlice'
+import { LinkBehavior } from '../LinkBehavior'
 
 interface CountryItemProps {
   countryId: EntityId
@@ -29,6 +30,7 @@ const CountryItem: React.FC<CountryItemProps> = ({ countryId }) => {
       <Card sx={{ height: '100%', width: { xs: '264px', sm: '100%' } }}>
         <CardActionArea
           href={`/country/${country.alpha3Code}`}
+          component={LinkBehavior}
           sx={{ height: '100%' }}
         >
           <CardMedia

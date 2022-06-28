@@ -1,7 +1,8 @@
-import { Theme, LinkProps as MuiLinkProps } from '@mui/material'
+import { Theme } from '@mui/material'
+import { LinkProps as MuiLinkProps } from '@mui/material/Link'
 import { createTheme, responsiveFontSizes } from '@mui/material/styles'
 import { ThemeMode } from '../types/theme'
-import { LinkBehavior } from './LinkBehavior'
+import { LinkBehavior } from '../components/LinkBehavior'
 import { THEME_MODE_PALETTE_MAP } from './palette'
 
 export const getMuiTheme = (themeMode: ThemeMode) => {
@@ -79,7 +80,6 @@ export const getMuiTheme = (themeMode: ThemeMode) => {
       },
       MuiButtonBase: {
         defaultProps: {
-          LinkComponent: LinkBehavior,
           disableRipple: true,
         },
       },
