@@ -14,8 +14,11 @@ import CountryFlag from '../components/CountryFlag'
 import { useAppSelector } from '../hooks/useAppSelector'
 import ErrorMessage from '../components/ErrorMessage'
 import { LinkBehavior } from '../components/LinkBehavior'
+import { useScrollToTop } from '../hooks/useScrollToTop'
 
 const Country: React.FC = () => {
+  useScrollToTop()
+
   const { code } = useParams()
   const error = useAppSelector(selectCountryError)
   const dispatch = useAppDispatch()

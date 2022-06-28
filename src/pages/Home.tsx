@@ -5,8 +5,11 @@ import CountryList from '../components/CountryList/CountryList'
 import SearchFilter from '../components/SearchFilter/SearchFilter'
 import { useAppDispatch } from '../hooks/useAppDispatch'
 import ScrollToTop from '../components/ScrollToTop'
+import { useScrollToTop } from '../hooks/useScrollToTop'
 
 const Home: React.FC = () => {
+  useScrollToTop()
+
   const dispatch = useAppDispatch()
 
   React.useEffect(() => {

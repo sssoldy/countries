@@ -5,7 +5,13 @@ import { THEME_MODE_PALETTE_MAP } from '../../theme/palette'
 const CountryItemFallback: React.FC = () => {
   return (
     <Grid item sm={6} md={4} lg={3}>
-      <Box sx={{ borderRadius: '4px', overflow: 'hidden' }}>
+      <Box
+        sx={{
+          width: { xs: '264px', sm: '100%' },
+          borderRadius: '4px',
+          overflow: 'hidden',
+        }}
+      >
         <Skeleton variant="rectangular" height={160} />
         <Box
           sx={theme => ({
